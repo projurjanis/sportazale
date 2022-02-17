@@ -1,6 +1,11 @@
-id=0
+f = open("id.txt","r")
+id=int(f.readline())
+f.close()
+
 max_ietilpiba = 20
+
 restart = "y"
+
 pieejamas_dienas = [
     "pirmdiena", "otrdiena", "trešdiena", "ceturtdiena", "piektdiena",
     "sestdiena", "svētdiena"
@@ -21,11 +26,19 @@ dict_laiki={
   6:pieejamie_laiki_6,
   7:pieejamie_laiki_7
 }
+dict_faili={
+  1:"pirmdiena.txt",
+  2:"otrdiena.txt",
+  3:"tresdiena.txt",
+  4:"ceturtdiena.txt",
+  5:"piektdiena.txt",
+  6:"sestdiena.txt",
+  7:"svetdiena.txt"
+}
 
 
 
 while restart == "y":
-  id+=1
   i=1
   izvele0 = int(
       input(
@@ -39,7 +52,7 @@ while restart == "y":
       print(str(i)+"."+z)
       i+=1
       if i==len(pieejamas_dienas)+1:
-        print(str(i)+".atpakaļ")
+        print(str(i)+".sākums")
     izvele1=int(input("Ievadi skaitli!\n"))
     if izvele1==len(pieejamas_dienas)+1:
       continue
@@ -55,7 +68,7 @@ while restart == "y":
         print(str(i)+"."+z)
         if i==len(dict_laiki[diena]):
           i+=1
-          print(str(i)+".atpakaļ")
+          print(str(i)+".sākums")
       izvele2=int(input("Ievadi skaitli!\n"))
       if izvele2==i:
         continue
@@ -66,7 +79,14 @@ while restart == "y":
         laiks=izvele2
         print("_____________________________________________________________")
         vards=input("Ievadi savu pilno vārdu un uzvārdu:\n")
-        print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id}")
+        print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}")
+        id+=1
+        f=open("id.txt","w")
+        f.write(str(id))
+        f.close()
+        f=open(dict_faili[diena],"a")
+        f.write(str(id)+" "+str(laiks)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[laiks][laiks])+" "+vards+"\n")
+        f.close()
         continue
               
 
