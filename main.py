@@ -85,7 +85,7 @@ while restart == "y":
         f.write(str(id))
         f.close()
         f=open(dict_faili[diena],"a")
-        f.write(str(id)+" "+str(laiks)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[laiks][laiks])+" "+vards+"\n")
+        f.write(str(id)+" "+str(diena)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[diena][laiks-1])+" "+vards+"\n")
         f.close()
         continue
               
