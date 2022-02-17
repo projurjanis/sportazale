@@ -64,6 +64,7 @@ while restart == "y":
         continue
       else:
         laiks=izvele2
+        print("_____________________________________________________________")
         vards=input("Ievadi savu pilno vārdu un uzvārdu:\n")
         print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id}")
         continue
