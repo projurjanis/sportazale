@@ -2,8 +2,7 @@ f = open("id.txt","r")
 id=int(f.readline())
 f.close()
 
-max_ietilpiba = 20
-ietilpiba_pirmdiena
+max_ietilpiba = 5
 
 restart = "y"
 
@@ -37,11 +36,38 @@ dict_faili={
   7:"svetdiena.txt"
 }
 
-dict_ietilpiba
 
+dict_ietilpiba={
+  1:[0,0,0,0,0,0,0,0],
+  2:[0,0,0,0,0,0,0,0],
+  3:[0,0,0,0,0,0,0,0],
+  4:[5,5,5,5,5,5,5,5],
+  5:[0,0,0,0,0,0,0,0],
+  6:[0,0,0,0,0,0,0,0],
+  7:[0,0,0,0,0,0,0,0]
+}
 
 while restart == "y":
+  nepieejamas_dienas=[]
   i=1
+  for i in range(1, 8):
+    with open(dict_faili[i], "r") as f:
+      lines = f.readlines()
+    with open(dict_faili[i], "r") as f:
+      for line in lines:
+        saraksts = line.split()
+        if len(saraksts)<4:
+          continue
+        else:
+          laikaid = int(saraksts[3])
+          (dict_ietilpiba[i])[laikaid-1]+=1
+  for i in range(1,8):
+    skaits_pilns=0
+    for y in range(8):
+      if (dict_ietilpiba[i])[y]>=max_ietilpiba:
+        skaits_pilns+=1
+        if skaits_pilns==8:
+          nepieejamas_dienas.append(i)
   izvele0 = int(
       input(
         "_____________________________________________________________\n1.Veikt rezervāciju\n2.Atcelt rezervāciju\n3.Pamest lietotni\nIevadi skaitli!\n"
@@ -49,6 +75,7 @@ while restart == "y":
   if izvele0 == 3:
       restart = "n"
   if izvele0 == 1:
+    i=1
     print("_____________________________________________________________\nIzvēlies dienu!")
     for z in (pieejamas_dienas):
       print(str(i)+"."+z)
@@ -130,12 +157,4 @@ while restart == "y":
               f.write(line)
     else:
       print("Rezervācija ar izvēlēto personas kodu neeksistē!")
-
-
-
-    
-              
-
-
-
-
+print(nepieejamas_dienas)
