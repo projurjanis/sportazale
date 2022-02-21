@@ -3,6 +3,7 @@ id=int(f.readline())
 f.close()
 
 max_ietilpiba = 20
+ietilpiba_pirmdiena
 
 restart = "y"
 
@@ -36,6 +37,7 @@ dict_faili={
   7:"svetdiena.txt"
 }
 
+dict_ietilpiba
 
 
 while restart == "y":
@@ -79,15 +81,59 @@ while restart == "y":
         laiks=izvele2
         print("_____________________________________________________________")
         vards=input("Ievadi savu pilno vārdu un uzvārdu:\n")
-        print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}")
+        personas_kods=input("Ievadi savu personas kodu (tiks izmantots rezervācijas atcelšanai):\n")
+        print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ rezervācija!")
         id+=1
         f=open("id.txt","w")
         f.write(str(id))
         f.close()
         f=open(dict_faili[diena],"a")
-        f.write(str(id)+" "+str(diena)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[diena][laiks-1])+" "+vards+"\n")
+        f.write(str(id)+" "+personas_kods+" "+str(diena)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[diena][laiks-1])+" "+vards+"\n")
         f.close()
         continue
+  if izvele0 == 2:
+    idievade=input("Ievadi savu personas kodu, lai atceltu rezervāciju.\nJa vēlies atpakaļ, rakstiet burtu x: ")
+    if idievade=="x":
+      continue
+    vai_ir = False
+    skaits = 0
+    for i in range(1,8):
+      with open(dict_faili[i], "r") as f:
+        lines = f.readlines()
+      with open(dict_faili[i], "r") as f:
+        for line in lines:
+          saraksts=line.split()
+          if saraksts[1]==str(idievade):
+            skaits+=1
+            vai_ir = True
+    if vai_ir and skaits==1:
+      for i in range(1,8):
+        with open(dict_faili[i], "r") as f:
+          lines = f.readlines()
+        with open(dict_faili[i], "w") as f:
+          for line in lines:
+            saraksts=line.split()
+            if saraksts[1]!=str(idievade):
+                f.write(line)
+      print("Paldies, jūsu rezervācija ir atcelta!")
+    elif vai_ir and skaits>1:
+      idievade2=input("Ievadi savu rezervācijas ID, uz doto personas kodu ir vairākas rezervācijas:\n")
+      for i in range(1,8):
+        with open(dict_faili[i], "r") as f:
+          lines = f.readlines()
+        with open(dict_faili[i], "w") as f:
+          for line in lines:
+            saraksts=line.split()
+            if saraksts[0]==str(idievade2) and saraksts[1]==str(idievade):
+              continue
+            else:
+              f.write(line)
+    else:
+      print("Rezervācija ar izvēlēto personas kodu neeksistē!")
+
+
+
+    
               
 
 
