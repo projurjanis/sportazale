@@ -42,7 +42,7 @@ dict_ietilpiba={
   2:[0,0,0,0,0,0,0,0],
   3:[0,0,0,0,0,0,0,0],
   4:[5,5,5,5,5,5,5,5],
-  5:[0,0,0,0,0,0,0,0],
+  5:[0,0,0,5,0,0,0,0],
   6:[0,0,0,0,0,0,0,0],
   7:[0,0,0,0,0,0,0,0]
 }
@@ -77,34 +77,55 @@ while restart == "y":
   if izvele0 == 1:
     i=1
     print("_____________________________________________________________\nIzvēlies dienu!")
+    izlaistas_dienas=[]
     for z in (pieejamas_dienas):
-      print(str(i)+"."+z)
-      i+=1
+      if i not in nepieejamas_dienas:
+        print(str(i-len(izlaistas_dienas))+"."+z)
+        i+=1
+      else:
+        izlaistas_dienas.append(i)
+        i+=1
       if i==len(pieejamas_dienas)+1:
-        print(str(i)+".sākums")
+        print(str(i-len(izlaistas_dienas))+".sākums")
     izvele1=int(input("Ievadi skaitli!\n"))
-    if izvele1==len(pieejamas_dienas)+1:
+    if izvele1==i-len(izlaistas_dienas):
       continue
-    elif izvele1>len(pieejamas_dienas):
+    elif izvele1>len(pieejamas_dienas)-len(izlaistas_dienas):
       print("_____________________________________________________________\nTādas izvēles nepastāv, lūdzu sāciet pa jaunam.")
       continue       
     else:
+      izlaistie_laiki=[]
+      nepieejamie_laiki=[]
       i=0
+      for i in range(1,izvele1+1):
+        if i in izlaistas_dienas:
+          izvele1+=1
       diena=izvele1
+      for i in range(8):
+        if dict_ietilpiba[diena][i]>=max_ietilpiba:          
+          nepieejamie_laiki.append(i)
       print("_____________________________________________________________")
-      for z in (dict_laiki[diena]):
-        i+=1
-        print(str(i)+"."+z)
-        if i==len(dict_laiki[diena]):
+      i=1
+      print(nepieejamie_laiki)
+      for z in dict_laiki[diena]:
+        if i not in nepieejamie_laiki:
+          print(str(i-len(izlaistie_laiki))+"."+z)
           i+=1
-          print(str(i)+".sākums")
+        else:
+          izlaistie_laiki.append(i)
+          i+=1
+        if i==len(dict_laiki[diena])+1:
+          print(str(i-len(izlaistas_dienas))+".sākums")
       izvele2=int(input("Ievadi skaitli!\n"))
-      if izvele2==i:
+      if izvele2==i-len(izlaistas_dienas):
         continue
-      elif izvele2>i:
+      elif izvele2>i-len(izlaistas_dienas):
         print("_____________________________________________________________\nTādas izvēles nepastāv, lūdzu sāciet pa jaunam.")
         continue
       else:
+        for i in range(1,izvele2+1):
+          if i in izlaistie_laiki:
+            izvele2+=1
         laiks=izvele2
         print("_____________________________________________________________")
         vards=input("Ievadi savu pilno vārdu un uzvārdu:\n")
