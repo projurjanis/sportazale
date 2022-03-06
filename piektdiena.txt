@@ -1,1 +1,11 @@
-48 hallo 5 4 piektdiena 13:30-15:00 ralfins
+51 mulkis 5 2 piektdiena 10:30-12:00 ralfsi
+51 mulkis 5 2 piektdiena 10:30-12:00 ralfsi
+51 mulkis 5 2 piektdiena 10:30-12:00 ralfsi
+51 mulkis 5 2 piektdiena 10:30-12:00 ralfsi
+51 mulkis 5 2 piektdiena 10:30-12:00 ralfsi
+52 losis 5 3 piektdiena 12:00-13:30 ralfsinsss
+53 losi 5 3 piektdiena 12:00-13:30 hallo
+54 losi 5 3 piektdiena 12:00-13:30 hallo
+55 asd 5 3 piektdiena 12:00-13:30 asd
+56 123 5 5 piektdiena 15:00-16:30 losis
+55 asd 5 3 piektdiena 12:00-13:30 asd

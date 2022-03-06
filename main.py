@@ -42,7 +42,7 @@ dict_ietilpiba={
   2:[0,0,0,0,0,0,0,0],
   3:[0,0,0,0,0,0,0,0],
   4:[5,5,5,5,5,5,5,5],
-  5:[0,0,0,5,0,0,0,0],
+  5:[0,0,0,0,0,0,0,0],
   6:[0,0,0,0,0,0,0,0],
   7:[0,0,0,0,0,0,0,0]
 }
@@ -103,10 +103,10 @@ while restart == "y":
       diena=izvele1
       for i in range(8):
         if dict_ietilpiba[diena][i]>=max_ietilpiba:          
-          nepieejamie_laiki.append(i)
+          nepieejamie_laiki.append(i+1)
       print("_____________________________________________________________")
       i=1
-      print(nepieejamie_laiki)
+      
       for z in dict_laiki[diena]:
         if i not in nepieejamie_laiki:
           print(str(i-len(izlaistie_laiki))+"."+z)
@@ -115,9 +115,9 @@ while restart == "y":
           izlaistie_laiki.append(i)
           i+=1
         if i==len(dict_laiki[diena])+1:
-          print(str(i-len(izlaistas_dienas))+".sākums")
+          print(str(i-len(izlaistie_laiki))+".sākums")
       izvele2=int(input("Ievadi skaitli!\n"))
-      if izvele2==i-len(izlaistas_dienas):
+      if izvele2==i-len(izlaistie_laiki):
         continue
       elif izvele2>i-len(izlaistas_dienas):
         print("_____________________________________________________________\nTādas izvēles nepastāv, lūdzu sāciet pa jaunam.")
@@ -178,4 +178,5 @@ while restart == "y":
               f.write(line)
     else:
       print("Rezervācija ar izvēlēto personas kodu neeksistē!")
-print(nepieejamas_dienas)
+for i in range(1,8):
+  print(dict_ietilpiba[i])
