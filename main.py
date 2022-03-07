@@ -36,8 +36,8 @@ dict_faili={
   7:"svetdiena.txt"
 }
 
-
-dict_ietilpiba={
+while restart == "y":
+  dict_ietilpiba={
   1:[0,0,0,0,0,0,0,0],
   2:[0,0,0,0,0,0,0,0],
   3:[0,0,0,0,0,0,0,0],
@@ -45,9 +45,7 @@ dict_ietilpiba={
   5:[0,0,0,0,0,0,0,0],
   6:[0,0,0,0,0,0,0,0],
   7:[0,0,0,0,0,0,0,0]
-}
-
-while restart == "y":
+  }
   nepieejamas_dienas=[]
   i=1
   for i in range(1, 8):
@@ -109,7 +107,7 @@ while restart == "y":
       
       for z in dict_laiki[diena]:
         if i not in nepieejamie_laiki:
-          print(str(i-len(izlaistie_laiki))+"."+z)
+          print(str(i-len(izlaistie_laiki))+"."+z+" "+str(dict_ietilpiba[diena][i-1])+"/"+str(max_ietilpiba)+" "+str(round((dict_ietilpiba[diena][i-1]/max_ietilpiba)*100,2))+"%")
           i+=1
         else:
           izlaistie_laiki.append(i)
@@ -178,5 +176,3 @@ while restart == "y":
               f.write(line)
     else:
       print("Rezervācija ar izvēlēto personas kodu neeksistē!")
-for i in range(1,8):
-  print(dict_ietilpiba[i])
