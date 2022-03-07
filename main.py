@@ -208,6 +208,8 @@ while restart == "y":
             saraksts=line.split()
             if len(saraksts)>0:
               if saraksts[1]==str(izvele3):
+                if skaits==0:
+                  print("Jūsu rezervācijas:")
                 print(str(saraksts[4])+" "+str(saraksts[5])+" "+str(saraksts[6])+" ID:"+str(saraksts[0]))
                 skaits+=1
                 vai_ir = True
