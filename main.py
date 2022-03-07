@@ -68,9 +68,9 @@ while restart == "y":
           nepieejamas_dienas.append(i)
   izvele0 = int(
       input(
-        "_____________________________________________________________\n1.Veikt rezervāciju\n2.Atcelt rezervāciju\n3.Pamest lietotni\nIevadi skaitli!\n"
+        "_____________________________________________________________\n1.Veikt rezervāciju\n2.Atcelt rezervāciju\n3.Apskatīt savas rezervācijas\n4.Pamest lietotni\nIevadi skaitli!\n"
         ))
-  if izvele0 == 3:
+  if izvele0 == 4:
       restart = "n"
   if izvele0 == 1:
     i=1
@@ -127,7 +127,9 @@ while restart == "y":
         laiks=izvele2
         print("_____________________________________________________________")
         vards=input("Ievadi savu pilno vārdu un uzvārdu:\n")
+        print("_____________________________________________________________")
         personas_kods=input("Ievadi savu personas kodu (tiks izmantots rezervācijas atcelšanai):\n")
+        print("_____________________________________________________________")
         print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ rezervācija!")
         id+=1
         f=open("id.txt","w")
@@ -176,3 +178,26 @@ while restart == "y":
               f.write(line)
     else:
       print("Rezervācija ar izvēlēto personas kodu neeksistē!")
+  if izvele0==3:
+    print("_____________________________________________________________")
+    izvele3=input("Ievadi savu personas kodu, lai apskatītu rezervācijas. Ja vēlies uz sākumu, raksti x.\n")
+    print("_____________________________________________________________")
+    if izvele3=="x" or izvele3=="X":
+      continue
+    else:
+      vai_ir = False
+      skaits = 0
+      for i in range(1,8):
+        with open(dict_faili[i], "r") as f:
+          lines = f.readlines()
+        with open(dict_faili[i], "r") as f:
+          for line in lines:
+            saraksts=line.split()
+            if len(saraksts)>0:
+              if saraksts[1]==str(izvele3):
+                print(str(saraksts[4])+" "+str(saraksts[5])+" "+str(saraksts[6])+" ID:"+str(saraksts[0]))
+                skaits+=1
+                vai_ir = True
+      if vai_ir == False:
+        print("Izvēlētajam personas kodam rezervāciju nav. Pārbaudiet, vai ierakstījāt to pareizi.")
+      
