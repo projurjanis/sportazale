@@ -14,3 +14,4 @@
 59 hallo 5 5 piektdiena 15:00-16:30 ralfins
 60 ludzu 5 5 piektdiena 15:00-16:30 haalao
 61 test 5 1 piektdiena 9:00-10:30 hall
+65 mulkis 5 1 piektdiena 9:00-10:30 ra

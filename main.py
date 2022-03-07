@@ -130,15 +130,28 @@ while restart == "y":
         print("_____________________________________________________________")
         personas_kods=input("Ievadi savu personas kodu (tiks izmantots rezervācijas atcelšanai):\n")
         print("_____________________________________________________________")
-        print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ rezervācija!")
-        id+=1
-        f=open("id.txt","w")
-        f.write(str(id))
-        f.close()
-        f=open(dict_faili[diena],"a")
-        f.write(str(id)+" "+personas_kods+" "+str(diena)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[diena][laiks-1])+" "+vards+"\n")
-        f.close()
-        continue
+        vai_ir = False
+        for i in range(1,8):
+          with open(dict_faili[i], "r") as f:
+            lines = f.readlines()
+          with open(dict_faili[i], "r") as f:
+            for line in lines:
+              saraksts=line.split()
+              if len(saraksts)>0:
+                if saraksts[1]==personas_kods and str(laiks)==saraksts[3] and str(diena)==saraksts[2]:
+                  vai_ir = True
+        if vai_ir:
+          print("Attiecīgajam personas kodam jau eksistē reģistrācija izvēlētajā laikā!")
+        else:
+          print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ rezervācija!")
+          id+=1
+          f=open("id.txt","w")
+          f.write(str(id))
+          f.close()
+          f=open(dict_faili[diena],"a")
+          f.write(str(id)+" "+personas_kods+" "+str(diena)+" "+str(laiks)+" "+str(pieejamas_dienas[diena-1])+" "+str(dict_laiki[diena][laiks-1])+" "+vards+"\n")
+          f.close()
+          continue
   if izvele0 == 2:
     idievade=input("Ievadi savu personas kodu, lai atceltu rezervāciju.\nJa vēlies atpakaļ, rakstiet burtu x: ")
     if idievade=="x":
