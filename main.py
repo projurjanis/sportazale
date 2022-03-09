@@ -41,7 +41,7 @@ while restart == "y":
   1:[0,0,0,0,0,0,0,0],
   2:[0,0,0,0,0,0,0,0],
   3:[0,0,0,0,0,0,0,0],
-  4:[5,5,5,5,5,5,5,5],
+  4:[0,0,0,0,0,0,0,0],
   5:[0,0,0,0,0,0,0,0],
   6:[0,0,0,0,0,0,0,0],
   7:[0,0,0,0,0,0,0,0]
@@ -71,7 +71,8 @@ while restart == "y":
         "_____________________________________________________________\n1.Veikt rezervāciju\n2.Atcelt rezervāciju\n3.Apskatīt savas rezervācijas\n4.Pamest lietotni\nIevadi skaitli!\n"
         ))
   if izvele0 == 4:
-      restart = "n"
+    restart = "n"
+    continue
   if izvele0 == 1:
     i=1
     print("_____________________________________________________________\nIzvēlies dienu!")
@@ -143,7 +144,7 @@ while restart == "y":
         if vai_ir:
           print("Attiecīgajam personas kodam jau eksistē reģistrācija izvēlētajā laikā!")
         else:
-          print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ rezervācija!")
+          print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ vai jāapskata rezervācija!")
           id+=1
           f=open("id.txt","w")
           f.write(str(id))
@@ -153,6 +154,7 @@ while restart == "y":
           f.close()
           continue
   if izvele0 == 2:
+    print("_____________________________________________________________")
     idievade=input("Ievadi savu personas kodu, lai atceltu rezervāciju.\nJa vēlies atpakaļ, rakstiet burtu x: ")
     if idievade=="x":
       continue
@@ -164,9 +166,10 @@ while restart == "y":
       with open(dict_faili[i], "r") as f:
         for line in lines:
           saraksts=line.split()
-          if saraksts[1]==str(idievade):
-            skaits+=1
-            vai_ir = True
+          if len(saraksts)>1:
+            if saraksts[1]==str(idievade):
+              skaits+=1
+              vai_ir = True
     if vai_ir and skaits==1:
       for i in range(1,8):
         with open(dict_faili[i], "r") as f:
@@ -174,10 +177,14 @@ while restart == "y":
         with open(dict_faili[i], "w") as f:
           for line in lines:
             saraksts=line.split()
-            if saraksts[1]!=str(idievade):
-                f.write(line)
+            if len(saraksts)>1:
+              if saraksts[1]!=str(idievade):
+                  f.write(line)
       print("Paldies, jūsu rezervācija ir atcelta!")
+      continue
     elif vai_ir and skaits>1:
+      vai_ir_2= False
+      print("_____________________________________________________________")
       idievade2=input("Ievadi savu rezervācijas ID, uz doto personas kodu ir vairākas rezervācijas:\n")
       for i in range(1,8):
         with open(dict_faili[i], "r") as f:
@@ -186,11 +193,20 @@ while restart == "y":
           for line in lines:
             saraksts=line.split()
             if saraksts[0]==str(idievade2) and saraksts[1]==str(idievade):
+              vai_ir_2 = True
               continue
             else:
               f.write(line)
+      if vai_ir_2 == False:
+        print("Rezervācija ar izvēlēto ID neeksistē!")
+        continue
+      else:
+        print("Paldies, jūsu rezervācija ir atcelta!")
+        continue
+      
     else:
       print("Rezervācija ar izvēlēto personas kodu neeksistē!")
+      continue
   if izvele0==3:
     print("_____________________________________________________________")
     izvele3=input("Ievadi savu personas kodu, lai apskatītu rezervācijas. Ja vēlies uz sākumu, raksti x.\n")
@@ -210,9 +226,11 @@ while restart == "y":
               if saraksts[1]==str(izvele3):
                 if skaits==0:
                   print("Jūsu rezervācijas:")
-                print(str(saraksts[4])+" "+str(saraksts[5])+" "+str(saraksts[6])+" ID:"+str(saraksts[0]))
+                print(str(saraksts[4])+" "+str(saraksts[5])+" "+str(saraksts[6])+" "+str(saraksts[7])+" ID:"+str(saraksts[0]))
                 skaits+=1
                 vai_ir = True
       if vai_ir == False:
         print("Izvēlētajam personas kodam rezervāciju nav. Pārbaudiet, vai ierakstījāt to pareizi.")
+  else:
+    print("Tādas izvēles nepastāv.")
       
