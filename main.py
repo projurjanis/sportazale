@@ -143,6 +143,7 @@ while restart == "y":
                   vai_ir = True
         if vai_ir:
           print("Attiecīgajam personas kodam jau eksistē reģistrācija izvēlētajā laikā!")
+          continue
         else:
           print(f"Paldies par reģistrāciju! Jūsu reģistrācijas ID ir {id+1}. Pierakstiet to, ja nu gadījumā jāatceļ vai jāapskata rezervācija!")
           id+=1

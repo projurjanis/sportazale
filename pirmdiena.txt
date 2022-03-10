@@ -5,3 +5,4 @@
 67 1 1 1 pirmdiena 9:00-10:30 1
 74 000000-00000 1 2 pirmdiena 10:30-12:00 Ralfs Jurjānis
 76 123145 1 4 pirmdiena 13:30-15:00 rafls
+81 120504-21371 1 3 pirmdiena 12:00-13:30 andza
